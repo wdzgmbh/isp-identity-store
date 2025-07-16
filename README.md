@@ -7,7 +7,7 @@ isp-identity-store claims to be a one-stop-shop for authenticating customers.
 ## Current Features
 
 + Accounts
-  + LineID
+  + LineID (according to https://ak-spri.de/wp-content/uploads/Struktur-und-Semantik-der-LineID_V.1.4.pdf)
   + Bandwidth
 + IPoE Authentication
   + Authenticate via LineID
