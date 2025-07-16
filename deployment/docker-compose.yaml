@@ -1,0 +1,7 @@
+services:
+  freeradius:
+    build: .
+    network_mode: host
+    volumes:
+      - "./data/logs:/var/log/freeradius"
+
