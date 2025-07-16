@@ -11,7 +11,7 @@ class PrimaryModel(models.Model):
 
 
 class Account(PrimaryModel):
-    home_id = models.CharField(max_length=30)
+    line_id = models.CharField(max_length=30)
 
     # If there is no limitation, this might be null.
     down_speed_mbit = models.PositiveIntegerField(null=True)

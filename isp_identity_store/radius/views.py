@@ -15,7 +15,7 @@ class AuthView(View):
         account = self.find_account(**args)
 
         if not account:
-            return JsonResponse(status=401, data={"Reply-Message": "Home-ID is not valid"})
+            return JsonResponse(status=401, data={"Reply-Message": "LineID is not valid"})
 
         # Example Values:
         #
@@ -73,7 +73,7 @@ class AuthView(View):
         return JsonResponse(status=200, data=radiusAttribute)
 
 
-class AuthHomeIdView(AuthView):
+class AuthLineIdView(AuthView):
 
-    def find_account(self, home_id):
-        return Account.objects.filter(home_id=home_id).first()
+    def find_account(self, line_id):
+        return Account.objects.filter(line_id=line_id).first()

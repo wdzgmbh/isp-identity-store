@@ -7,10 +7,10 @@ isp-identity-store claims to be a one-stop-shop for authenticating customers.
 ## Current Features
 
 + Accounts
-  + Home ID
+  + LineID
   + Bandwidth
 + IPoE Authentication
-  + Authenticate via Home ID
+  + Authenticate via LineID
 
 ## Components
 
