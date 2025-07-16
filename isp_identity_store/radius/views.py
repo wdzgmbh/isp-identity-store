@@ -44,22 +44,22 @@ class AuthView(View):
 
         radiusAttribute = dict()
 
-        if account.downSpeedMBit:
+        if account.down_speed_mbit:
             # Set the queue size to 4 ms of the shaped bandwidth
-            queueSizeBytes = round((account.downSpeedMBit * 1000) * 1024 / 8 * 0.004)
+            queueSizeBytes = round((account.down_speed_mbit * 1000) * 1024 / 8 * 0.004)
             radiusAttribute["RtBrick-QoS-Queues"] = f"Q0_PPPOE,{queueSizeBytes};"
 
-            shaperSpeedHighKBit = round((account.downSpeedMBit * 1000) * 0.9)
-            shaperSpeedLowKBit = round((account.downSpeedMBit * 1000) * 0.98)
+            shaperSpeedHighKBit = round((account.down_speed_mbit * 1000) * 0.9)
+            shaperSpeedLowKBit = round((account.down_speed_mbit * 1000) * 0.98)
 
             radiusAttribute["RtBrick-QoS-Shaper"] = \
                 f"name=ACCESS_SHAPER,high={shaperSpeedHighKBit},low={shaperSpeedLowKBit};"
 
-        if account.upSpeedMBit:
+        if account.up_speed_mbit:
             # Set CBS to 10th of bandwidth (to allow about 100 ms of burst)
 
-            cbsKBit = round((account.upSpeedMBit * 1000) / 100)
-            cirKBit = round((account.upSpeedMBit * 1000) * 0.98)
+            cbsKBit = round((account.up_speed_mbit * 1000) / 100)
+            cirKBit = round((account.up_speed_mbit * 1000) * 0.98)
 
             levelStrings = [
                 f"level=1,cir={cirKBit},cbs={cbsKBit};"
