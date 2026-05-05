@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% load render_table from django_tables2 %}
+
+{% block content %}
+
+<h1 class="bd-title pb-2" >{% block title %}{% endblock title %}</h1>
+
+    {% block inner_content %}
+
+    {% endblock %}
+{% endblock %}

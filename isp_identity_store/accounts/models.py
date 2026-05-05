@@ -1,6 +1,7 @@
 import uuid
 
 from django.db import models
+from django.urls import reverse
 
 
 class PrimaryModel(models.Model):
@@ -17,3 +18,11 @@ class Account(PrimaryModel):
     down_speed_mbit = models.PositiveIntegerField(null=True)
     up_speed_mbit = models.PositiveIntegerField(null=True)
 
+    def get_absolute_url(self):
+        return reverse("accounts:detail-view", args=[str(self.id)])
+
+    def __str__(self):
+        if self.line_id:
+            return self.line_id
+
+        return super().__str__()
