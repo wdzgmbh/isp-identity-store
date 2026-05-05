@@ -3,11 +3,13 @@ rest {
 	connect_uri = "http://127.0.0.1:8000"
 
 	authorize {
-		uri = "${..connect_uri}/radius/auth/line-id/%{string:ADSL-Agent-Circuit-ID}"
-		method = 'get'
+		uri = "${..connect_uri}/radius/api/auth"
+		method = 'post'
+		body = 'json'
 	}
 	authenticate {
-		uri = "${..connect_uri}/radius/auth/line-id/%{string:ADSL-Agent-Circuit-ID}"
-		method = 'get'
+		uri = "${..connect_uri}/radius/api/auth"
+		method = 'post'
+		body = 'json'
 	}
 }

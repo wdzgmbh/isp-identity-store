@@ -1,8 +1,6 @@
 from django.contrib import admin
-from django.urls import path
-
-from radius.views import AuthLineIdView
+from django.urls import path, include
 
 urlpatterns = [
-    path('auth/line-id/<path:line_id>', AuthLineIdView.as_view())
+    path('api/', include("radius.api.urls"))
 ]

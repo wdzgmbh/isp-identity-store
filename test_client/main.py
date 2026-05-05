@@ -26,7 +26,7 @@ def main() -> int:
         RtBrick_Access_MAC_Address="00:25:90:bd:3a:59",
         RtBrick_Subscriber_Id=3,
         RtBrick_Subscriber_Ifl="ipoe-0/0/4/216454257090504779",
-        ADSL_Agent_Circuit_Id="DEU.WDZG01.WOB27384201",
+        ADSL_Agent_Circuit_Id="DEU.WDZG01.WOB2738420",
         ADSL_Agent_Remote_Id="ec0032.ce.as9136.net",
     )
 
