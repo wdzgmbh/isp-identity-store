@@ -1,10 +1,10 @@
 from django.urls import reverse, reverse_lazy
-from django_tables2 import Table, TemplateColumn, LinkColumn
+from django_tables2 import Table, TemplateColumn, LinkColumn, Column
 
-from accounts.models import Account
+from accounts.models import Account, Session
+
 
 class AccountLinkColumn(LinkColumn):
-
     def text_value(self, record, value):
         return str(record)
 
@@ -24,3 +24,9 @@ class AccountTable(Table):
     class Meta:
         model = Account
         fields = ['id', 'actions']
+
+
+class SessionTable(Table):
+    class Meta:
+        model = Session
+        fields = ['created_at', 'terminated_at', 'session_id', 'ip_address', 'ipv6_prefix', 'ipv6_pd_prefix', 'status']

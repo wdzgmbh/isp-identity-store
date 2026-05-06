@@ -38,14 +38,7 @@ server default {
       }
   }
 
-  preacct {
-    preprocess
-    acct_unique
-    suffix
-  }
-
   accounting {
-    detail
     rest
   }
 

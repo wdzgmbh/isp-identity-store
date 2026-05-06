@@ -4,7 +4,7 @@ from django.views.generic import UpdateView, DetailView, ListView
 
 from accounts.forms import AccountEditForm
 from accounts.models import Account
-from accounts.tables import AccountTable
+from accounts.tables import AccountTable, SessionTable
 
 
 # Create your views here.
@@ -23,6 +23,11 @@ class AccountListView(LoginRequiredMixin, ListView):
 class AccountDetail(LoginRequiredMixin, DetailView):
     template_name = "accounts/account_view.html"
     model = Account
+
+    def get_context_data(self, **kwargs):
+        ctx = super().get_context_data(**kwargs)
+        ctx['session_table'] = SessionTable(self.object.session_set.order_by('-created_at').all())
+        return ctx
 
 class AccountEditView(LoginRequiredMixin, UpdateView):
     model = Account

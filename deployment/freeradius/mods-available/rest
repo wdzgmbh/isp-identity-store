@@ -2,13 +2,19 @@ rest {
 
 	connect_uri = "http://127.0.0.1:8000"
 
-	authorize {
-		uri = "${..connect_uri}/radius/api/auth"
+
+	authenticate {
+		uri = "${..connect_uri}/radius/api/authenticate"
 		method = 'post'
 		body = 'json'
 	}
-	authenticate {
-		uri = "${..connect_uri}/radius/api/auth"
+	authorize {
+		uri = "${..connect_uri}/radius/api/authorize"
+		method = 'post'
+		body = 'json'
+	}
+    accounting {
+		uri = "${..connect_uri}/radius/api/accounting"
 		method = 'post'
 		body = 'json'
 	}

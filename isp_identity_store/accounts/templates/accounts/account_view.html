@@ -10,26 +10,41 @@
 
 {% block inner_content %}
 
-<div class="row">
-    <div class="col">
-        <h4>Information</h4>
-        <table class="table">
-          <tbody>
-            <tr>
-              <th scope="row">Line ID</th>
-              <td>{{ account.line_id }}</td>
-            </tr>
-            <tr>
-              <th scope="row">Speed</th>
-              <td>{{ account.down_speed_mbit }}/{{ account.up_speed_mbit }} MBit/s</td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="row">
+        <div class="col">
+            <h4>Information</h4>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row">Line ID</th>
+                    <td>{{ account.line_id }}</td>
+                </tr>
+                <tr>
+                    <th scope="row">Speed</th>
+                    <td>{{ account.down_speed_mbit }}/{{ account.up_speed_mbit }} MBit/s</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col">
+            <h4>Status</h4>
+            <table class="table">
+                <tbody>
+                <tr>
+                    <th scope="row">Session</th>
+                    <td>{{ account.last_session.status }}</td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
     </div>
-    <div class="col">
-      <h4>Sessions</h4>
+    <div class="row">
+        <div class="col">
+            <h4>Sessions</h4>
+            {% render_table session_table %}
+        </div>
     </div>
-  </div>
 
 
 
