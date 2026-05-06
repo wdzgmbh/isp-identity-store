@@ -1,11 +1,10 @@
 [project]
-name = "isp-identity-store"
+name = "isp_identity_store"
 version = "0.1.0"
 description = ""
 authors = [
     {name = "Johann Wagner",email = "johann.wagner@wobcom.de"}
 ]
-readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pyrad (>=2.4,<3.0)",
