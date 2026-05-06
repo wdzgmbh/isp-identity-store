@@ -10,8 +10,8 @@ class AccountLinkColumn(LinkColumn):
 
 class AccountTable(Table):
     ACTIONS_COLUMN = """
-        <a type="button" class="btn btn-sm btn-success" href="{{ record.get_absolute_url }}">View</a>
-        <a type="button" class="btn btn-sm btn-warning">Edit</a>
+        <a type="button" class="btn btn-sm btn-success" href="{% url 'accounts:detail-view' pk=record.pk %}">View</a>
+        <a type="button" class="btn btn-sm btn-warning" href="{% url 'accounts:edit-view' pk=record.pk %}">Edit</a>
     """
 
     id = AccountLinkColumn(
@@ -23,4 +23,4 @@ class AccountTable(Table):
 
     class Meta:
         model = Account
-        exclude = ['line_id', 'down_speed_mbit', 'up_speed_mbit']
+        fields = ['id', 'actions']

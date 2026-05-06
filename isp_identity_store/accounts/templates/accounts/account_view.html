@@ -4,6 +4,10 @@
 
 {% block title %}Account {{ account }}{% endblock %}
 
+{% block header_buttons %}
+    <a href="{% url 'accounts:edit-view' pk=object.pk %}" role="button" class="btn btn-warning">Edit</a>
+{% endblock %}
+
 {% block inner_content %}
 
 <div class="row">

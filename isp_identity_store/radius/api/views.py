@@ -1,4 +1,5 @@
 import codecs
+from django.contrib.auth.hashers import check_password
 
 from django.http import JsonResponse
 from rest_framework import authentication, permissions
@@ -23,12 +24,25 @@ class RadiusAuthView(ViewSet):
         value = v['value'][0]
         if v['type'] == 'octets':
             return codecs.decode(value[2:], 'hex').decode('utf-8')
-        return v
+
+        return value
 
     def post(self, request, format=None):
 
-        ADSL_Agent_Circuit_Id = self._get_value_from_request(request, 'ADSL-Agent-Circuit-Id')
-        account = Account.objects.filter(line_id=ADSL_Agent_Circuit_Id).first()
+        Framed_Protocol = self._get_value_from_request(request, "Framed-Protocol")
+
+        if Framed_Protocol:
+            User_Name = self._get_value_from_request(request, "User-Name")
+            User_Password = self._get_value_from_request(request, "User-Password")
+            account = Account.objects.filter(user=User_Name).first()
+
+            if not check_password(User_Password, account.password):
+                return JsonResponse(status=401, data={"Reply-Message": "Password is not valid"})
+
+        else:
+            ADSL_Agent_Circuit_Id = self._get_value_from_request(request, 'ADSL-Agent-Circuit-Id')
+            account = Account.objects.filter(line_id=ADSL_Agent_Circuit_Id).first()
+
 
         if not account:
             return JsonResponse(status=401, data={"Reply-Message": "LineID is not valid"})

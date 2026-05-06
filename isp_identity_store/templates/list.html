@@ -2,8 +2,15 @@
 {% load render_table from django_tables2 %}
 
 {% block content %}
+    <div class="header pb-4 d-flex justify-content-between align-items-center">
+        <h1 class="bd-title" >{% block title %}{% endblock title %}</h1>
+        <div class="btn-group">
+            {% block header_buttons %}
 
-<h1 class="bd-title pb-2" >{% block title %}{% endblock title %}</h1>
+            {% endblock %}
+        </div>
+    </div>
+
 
     {% block inner_content %}
 

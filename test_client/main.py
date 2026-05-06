@@ -4,14 +4,14 @@ from pyrad.dictionary import Dictionary
 import pyrad.packet
 
 
-def main() -> int:
+def radius_auth(username, password, is_pppoe = False):
     srv = Client(server="127.0.0.1", authport=1812, secret=b"testing123",
                  dict=Dictionary("test_client/dictionaries/dictionary"))
 
     # create request
     req = srv.CreateAuthPacket(
         code=pyrad.packet.AccessRequest,
-        User_Name="00:25:90:bd:3a:59@ipoe",
+        User_Name=username,
         # IP of BNG
         NAS_IP_Address="10.43.0.1",
         NAS_Identifier="lrma0001",
@@ -26,11 +26,14 @@ def main() -> int:
         RtBrick_Access_MAC_Address="00:25:90:bd:3a:59",
         RtBrick_Subscriber_Id=3,
         RtBrick_Subscriber_Ifl="ipoe-0/0/4/216454257090504779",
-        ADSL_Agent_Circuit_Id="DEU.WDZG01.WOB2738420",
+        ADSL_Agent_Circuit_Id="DEU.WDZG01.WOB2738425",
         ADSL_Agent_Remote_Id="ec0032.ce.as9136.net",
     )
 
-    req["User-Password"] = req.PwCrypt("ipoe")
+    if is_pppoe:
+        req["Framed-Protocol"] = "PPP"
+
+    req["User-Password"] = req.PwCrypt(password)
 
     # send request
     reply = srv.SendPacket(req)
@@ -44,6 +47,19 @@ def main() -> int:
     for i in reply.keys():
         print("%s: %s" % (i, reply[i]))
 
+
+def main_pppoe():
+    radius_auth("testeroni", "testeroni123", is_pppoe=True)
+
+
+def main_ipoe():
+    radius_auth("00:25:90:bd:3a:59@ipoe", "ipoe")
+
+
+
+def main() -> int:
+    main_ipoe()
+    main_pppoe()
     return 0
 
 
