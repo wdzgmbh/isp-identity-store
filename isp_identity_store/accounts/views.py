@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 
@@ -7,7 +8,7 @@ from accounts.tables import AccountTable
 
 # Create your views here.
 
-class AccountListView(TemplateView):
+class AccountListView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/account_list.html"
 
     def get_context_data(self, **kwargs):
@@ -18,7 +19,7 @@ class AccountListView(TemplateView):
         return ctx
 
 
-class AccountDetail(TemplateView):
+class AccountDetail(LoginRequiredMixin, TemplateView):
     template_name = "accounts/account_view.html"
 
     def get_context_data(self, **kwargs):

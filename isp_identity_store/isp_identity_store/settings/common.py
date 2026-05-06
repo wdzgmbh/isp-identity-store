@@ -40,6 +40,10 @@ DJANGO_TABLES2_TABLE_ATTRS = {
     },
 }
 
+LOGIN_URL = "/auth/login"
+LOGOUT_REDIRECT_URL = "/auth/login"
+LOGIN_REDIRECT_URL = "/account"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
