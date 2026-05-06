@@ -7,7 +7,7 @@ from accounts.models import Account
 class AccountEditForm(ModelForm):
     class Meta:
         model = Account
-        fields = ['line_id', 'user', 'password']
+        fields = ['line_id', 'user', 'password', 'down_speed_mbit', 'up_speed_mbit']
         widgets = {
             "password": PasswordInput
         }

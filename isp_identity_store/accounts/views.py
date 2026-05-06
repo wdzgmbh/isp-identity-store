@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import PasswordInput
-from django.views.generic import UpdateView, DetailView, ListView
+from django.views.generic import UpdateView, DetailView, ListView, CreateView
 
 from accounts.forms import AccountEditForm
 from accounts.models import Account
@@ -32,5 +32,10 @@ class AccountDetail(LoginRequiredMixin, DetailView):
 class AccountEditView(LoginRequiredMixin, UpdateView):
     model = Account
     template_name = "accounts/account_edit.html"
+    form_class = AccountEditForm
+
+class AccountCreateView(LoginRequiredMixin, CreateView):
+    model = Account
+    template_name = "accounts/account_new.html"
     form_class = AccountEditForm
 
