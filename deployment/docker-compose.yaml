@@ -10,7 +10,7 @@ services:
     env_file:
       - ./postgres.env
     volumes:
-      - "./data/postgres:/var/lib/postgres"
+      - "./data/postgres:/var/lib/postgresql"
   isp-identity-store:
     build: ..
     network_mode: host
