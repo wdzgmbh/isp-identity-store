@@ -55,7 +55,7 @@ class RadiusAccountingView(RadiusViewSet):
 
     def post(self, request, format=None):
 
-        account, resp  = self._get_account_from_request(request)
+        account, resp  = self._get_account_from_request(request, validate=False)
         if resp:
             return resp
 
