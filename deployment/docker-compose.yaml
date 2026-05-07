@@ -4,4 +4,18 @@ services:
     network_mode: host
     volumes:
       - "./data/logs:/var/log/freeradius"
+  postgres:
+    image: postgres:18.3
+    network_mode: host
+    env_file:
+      - ./postgres.env
+    volumes:
+      - "./data/postgres:/var/lib/postgres"
+  isp-identity-store:
+    build: ..
+    network_mode: host
+    environment:
+      - "DJANGO_SETTINGS_MODULE=isp_identity_store.settings_docker.production"
+    volumes:
+      - "./settings_docker:/app/isp_identity_store/isp_identity_store/settings_docker"
 

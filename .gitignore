@@ -1,4 +1,5 @@
 isp_identity_store/*.sqlite3
 deployment/data
-
+deployment/settings_docker/production.py
+deployment/postgres.env
 *.pyc

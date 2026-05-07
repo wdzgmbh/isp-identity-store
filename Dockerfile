@@ -2,11 +2,13 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-RUN pip install gunicorn
+RUN pip install poetry
 
 COPY . .
 
-RUN pip install ./isp_identity_store
+WORKDIR /app/isp_identity_store
+
+RUN poetry install --no-root
 
 # Run gunicorn
-CMD ["gunicorn", "isp_identity_store.wsgi", "--bind", "0.0.0.0:8000"]
+CMD ["poetry", "run", "gunicorn", "isp_identity_store.wsgi", "--bind", "0.0.0.0:8000"]
