@@ -144,8 +144,11 @@ class RadiusAuthorizeView(RadiusViewSet):
         #         Size: 6144000 byte
 
         radiusAttribute = dict()
+        replyMessage = ""
 
         if account.down_speed_mbit:
+            replyMessage += f"SRD={round(account.down_speed_mbit * 1000)}#"
+
             # Set the queue size to 4 ms of the shaped bandwidth
             queueSizeBytes = round((account.down_speed_mbit * 1000) * 1024 / 8 * 0.004)
             radiusAttribute["RtBrick-QoS-Queues"] = f"Q0_PPPOE,{queueSizeBytes};"
@@ -157,8 +160,9 @@ class RadiusAuthorizeView(RadiusViewSet):
                 f"name=ACCESS_SHAPER,high={shaperSpeedHighKBit},low={shaperSpeedLowKBit};"
 
         if account.up_speed_mbit:
-            # Set CBS to 10th of bandwidth (to allow about 100 ms of burst)
+            replyMessage += f"SRU={round(account.up_speed_mbit * 1000)}#"
 
+            # Set CBS to 10th of bandwidth (to allow about 100 ms of burst)
             cbsKBit = round((account.up_speed_mbit * 1000) / 100)
             cirKBit = round((account.up_speed_mbit * 1000) * 0.98)
 
@@ -170,5 +174,8 @@ class RadiusAuthorizeView(RadiusViewSet):
             ]
 
             radiusAttribute["RtBrick-QoS-Policer"] = "".join(levelStrings)
+
+        replyMessage += f"LID={account.line_id}#"
+        radiusAttribute["Reply-Message"] = replyMessage
 
         return JsonResponse(status=200, data=radiusAttribute)
