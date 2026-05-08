@@ -2,6 +2,7 @@ services:
   freeradius:
     build: .
     network_mode: host
+    restart: on-failure
     volumes:
       - "./data/logs:/var/log/freeradius"
   postgres:
